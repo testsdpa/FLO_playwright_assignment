@@ -2,14 +2,15 @@
 
 ## 📌 Overview
 
-This project contains an end-to-end and API automation framework built using **Playwright + TypeScript** to validate a simple energy usage application.
+This project contains an end-to-end and API automation framework built using **Playwright + TypeScript** to validate E2E scenarios and functionality of a simple energy usage application.
 
 The application includes:
 
-* 🔐 Login page (Basic Authentication)
-* 📊 Dashboard displaying energy consumption data
-* 📝 Multi-step form for entering energy usage
-* 🔌 API endpoint: `/api/nmi-data`
+* Login page (Basic Authentication)
+* Home page displaying assignment information
+* Dashboard displaying energy consumption data
+* Usage page for adding new consumption/usage records
+* API endpoint: `/api/nmi-data`
 
 ---
 
@@ -19,6 +20,8 @@ The application includes:
 * TypeScript
 * Node.js
 * Dotenv (environment configuration)
+* Basic logging utility
+* Code coverage (test-level using `c8`)
 
 ---
 
@@ -26,7 +29,7 @@ The application includes:
 
 This project follows a **Page Object Model (POM)** and clean separation of concerns:
 
-```
+```id="z8l2kf"
 tests/
  ├── e2e/        # UI tests
  ├── api/        # API tests
@@ -36,30 +39,33 @@ api/             # API service layer
 fixtures/        # Pre/post conditions (e.g., login handling)
 utils/           # Helpers (formatting, logging, auth)
 types/           # Type definitions
-test-data/       # Static/mock data
+test-data/       
 ```
 
 ---
 
 ## ✅ Test Coverage
 
+> ⚠️ **Note:** The implemented test scenarios are **sample-based and focused on core user flows** to demonstrate the framework’s capabilities.
+
 ### 🔐 Authentication
 
-* Valid login
-* Invalid login
-* Error message validation
+* Login is handled via **API-based authentication**
+* Session is established by injecting authentication state (e.g., token/session storage)
+* Avoids UI login dependency for faster and more stable tests
+* Includes invalid login and error handling validation
 
 ### 📊 Dashboard
 
 * Page load validation
-* Table rendering
+* Table rendering and data verification
 * UI vs API data validation
 
 ### 📝 Energy Usage
 
 * Multi-step form navigation
 * Field validations
-* Successful submission
+* Successful submission of usage records - E2E Validation
 
 ### 🔌 API Testing
 
@@ -138,35 +144,47 @@ This will open the Playwright HTML report.
 
 ## 📈 Code Coverage (Bonus)
 
-Basic coverage reporting is configured using `c8`.
-Note: Full frontend coverage requires application instrumentation.
+Code coverage is configured using `c8` to track **Playwright test execution coverage**.
+
+⚠️ This does **not represent frontend or backend application coverage**, as the application is not instrumented for coverage collection.
+
+Full application coverage would require integrating coverage tools into the application build process (e.g., Istanbul instrumentation), which is outside the scope of this assignment.
 
 ---
 
 ## 🧠 Design Decisions
 
-* Used **fixtures** to handle authentication centrally (avoids repeated login steps)
+* Implemented **API-based login via fixtures** to:
+
+  * reduce execution time
+  * avoid flaky UI login flows
+  * enable direct navigation to protected pages
+
+* Used **fixtures** to centralize authentication and test setup to act as Post Condition and Pre Condition steps
+
 * Separated **API layer** for reusable backend validation
+
 * Added **utility functions** for formatting and consistency
-* Implemented **UI vs API validation** for stronger assertions
+
+* Implemented **UI vs API validation** for integration testing and stronger assertions
 
 ---
 
 ## ⚠️ Assumptions & Limitations
 
-* Test credentials are hardcoded as per assignment instructions
-* No data cleanup for created records (test data persists)
-* Coverage is limited to test execution (not full app instrumentation)
-* Authentication handling is simplified and app-specific
+* Post-condition handling is not yet implemented (e.g., logout, data cleanup)
+* No CI/CD integration is currently configured
+* No work item integration (e.g., Azure DevOps)
+* Environment configuration is limited to localhost only
 
 ---
 
 ## 💯 Improvements (Future Work)
 
 * Add CI/CD integration (GitHub Actions / Azure DevOps)
-* Implement full frontend code coverage
-* Add data cleanup strategy
-* Introduce parallel environment configs (dev/uat/prod)
+* Implement post-condition handling (e.g., logout, cleanup)
+* Introduce data cleanup strategy
+* Support multiple environments (dev/uat/prod)
 
 ---
 
