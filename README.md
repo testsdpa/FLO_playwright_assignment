@@ -187,6 +187,102 @@ Full application coverage would require integrating coverage tools into the appl
 * Support multiple environments (dev/uat/prod)
 
 ---
+# Questions
+## 🧠 Technical Discussion & Reflection
+
+### 🤔 Advantages & Disadvantages of QA Technologies
+
+#### ✅ Advantages
+
+* **Playwright**
+
+  * Fast and reliable with built-in auto-waiting
+  * Supports both UI and API testing in a single framework
+  * Provides powerful debugging tools (trace viewer, screenshots, videos)
+  * Enables parallel execution and efficient test runs
+
+* **TypeScript**
+
+  * Strong typing improves maintainability and reduces runtime errors
+  * Better developer experience with IDE support and autocomplete
+
+* **API-based Authentication**
+
+  * Reduces execution time by skipping UI login
+  * Minimizes flaky tests caused by UI dependencies
+  * Allows direct navigation to protected pages
+
+---
+
+#### ❌ Disadvantages
+
+* Requires familiarity with Node.js and JavaScript/TypeScript
+* Code coverage using `c8` is limited to test execution only
+
+---
+
+### 🏗️ Test Design & Structure
+
+The test framework follows a **layered and modular architecture**:
+
+* UI tests (`tests/e2e`) and API tests (`tests/api`) are separated
+* Page Object Model (POM) is used to abstract UI interactions
+* API service layer encapsulates backend calls
+* Fixtures are used to handle setup (e.g., authentication)
+* Utilities provide reusable helper functions
+
+This design promotes:
+
+* Reusability
+* Scalability
+* Maintainability
+
+---
+
+### 📚 Design Patterns & Coding Practices
+
+#### 🧩 Design Patterns
+
+* **Page Object Model (POM)** – separates UI logic from test logic
+* **Fixture Pattern** – centralizes setup and preconditions
+* **Service Layer Pattern** – abstracts API interactions
+
+---
+
+#### 🧹 Coding Practices
+
+* Clear and descriptive naming conventions
+* Separation of concerns across folders and layers
+* Reusable utility functions for formatting and logging
+* Environment variables used to avoid hardcoding
+
+---
+
+#### 📖 Documentation
+
+* Comprehensive README with setup and execution steps
+* Minimal but meaningful inline comments for clarity
+
+---
+
+### 🔧 What Would Be Improved Next Time
+
+* Implement post-condition handling (e.g., logout, data cleanup)
+* Integrate CI/CD pipelines (GitHub Actions or Azure DevOps)
+* Expand test coverage with more edge cases and negative scenarios
+* Add multi-environment configuration support
+* Enhance reporting and logging integration
+* Test Data repository
+
+---
+
+### 💡 Alternative Approaches
+
+* Use **Cypress** for simpler frontend-focused automation
+* Use **Selenium WebDriver** for broader language support and legacy systems
+* Implement **BDD (Cucumber)** for business-readable test scenarios
+  
+---
 
 ## 👨‍💻 Author
 
