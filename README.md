@@ -91,6 +91,30 @@ npx playwright install
 
 ---
 
+### 3. Install c8 for coverage
+
+```bash
+npm install --save-dev c8
+```
+
+---
+
+### 4. run c8 for coverage
+
+```bash
+npm run coverage
+```
+
+---
+
+###  5. run View test report
+
+```bash
+npm run report
+```
+
+---
+
 ## 🔑 Environment Setup
 
 Create a `.env` file in the root:
